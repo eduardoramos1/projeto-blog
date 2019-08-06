@@ -51,7 +51,7 @@ app.engine('handlebars', handlebars({
 app.set('view engine', 'handlebars');
 //mongoose
 mongoose.Promise = global.Promise;
-mongoose.connect(db.mongoURI , { useNewUrlParser: true })
+mongoose.connect('mongodb://localhost/blog', { useNewUrlParser: true })
     .then(suc => console.log('Conectado ao banco de dados'))
     .catch(err => console.log('Erro ao conectar ao banco de dados' + err))
 //public
