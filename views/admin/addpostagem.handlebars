@@ -1,0 +1,31 @@
+{{!-- para pegar os erros que vieram do envio do formulario de postagens --}}
+{{#each erros}}
+    <div class="alert alert-danger">{{texto}}</div>
+{{else}}
+
+{{/each}}
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="mb-3">Criar postagem</h2>
+            <form action="/admin/postagens/nova" method="POST">
+                <label for="titulo">Título: </label>
+                <input type="text" name="titulo" class="form-control" required>
+                <label for="slug">Slug:</label>
+                <input type="text" name="slug" class="form-control" required>
+                <label for="descricao">Descrição: </label>
+                <input type="text" name="descricao" class="form-control" required>
+                <label for="conteudo">Conteúdo</label>
+                <textarea name="conteudo" class="form-control" rows="8" required></textarea>
+                <label for="categoria" class="mt-1">Categoria:</label>
+                <select name="categoria" class="form-control">
+                    {{#each categorias}}
+                        <option value="{{_id}}">{{nome}}</option>
+                    {{else}}
+                        <option value="0" >Nenhuma categoria encontrada</option>
+                    {{/each}}
+                </select>
+                <button type="submit" class="btn btn-success d-block mt-4">Enviar Postagem</button>
+            </form>
+    </div>
+</div>

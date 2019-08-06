@@ -1,0 +1,25 @@
+<h2>Listagem de categorias:</h2>
+<hr>
+<a href="/admin/categorias/add"><button class="btn btn-success my-5">Add categoria</button></a>
+
+{{#each categorias}}
+<div class="card my-1 bg-light ">
+    <div class="card-body">
+        <h4>{{nome}}</h4>       
+        <small class="d-block">slug: {{slug}}</small>
+        <small class="data date-{{id}} d-block">data: {{date}}</small>
+        <script>
+            document.querySelector('.date-{{id}}').innerHTML = new Date('{{date}}').toLocaleDateString();
+        </script>
+        <div class="d-flex align-items-center">
+            <a href="/admin/categorias/edit/{{id}}"><button class="btn-sm btn-info mt-4">Editar categoria</button></a>
+            <form action="/admin/categorias/deletar" method="POST" class="mt-4 ml-3">
+                <input type="hidden" name="id" value="{{_id}}">
+                <button type="submit" class="btn-sm btn-danger">Deletar</button>
+            </form>
+        </div>
+    </div>
+</div>
+{{else}}
+    <h4>Não há nenhuma categoria para ser mostrada</h4>
+{{/each}}

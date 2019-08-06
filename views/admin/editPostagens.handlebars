@@ -1,0 +1,43 @@
+{{!-- para pegar os erros que vieram do envio do formulario de postagens --}}
+{{#each erros}}
+<div class="alert alert-danger">{{texto}}</div>
+{{else}}
+
+{{/each}}
+
+<form action="/admin/postagens/edit" method="POST">
+    <input type="hidden" name="id" value="{{postagem._id}}">
+    <label for="titulo">Título: </label>
+    <input type="text" name="titulo" class="form-control" value="{{postagem.titulo}}" required> 
+    <label for="slug">Slug:</label>
+    <input type="text" name="slug" class="form-control" value="{{postagem.slug}}" required>
+    <label for="descricao">Descrição: </label>
+    <input type="text" name="descricao" class="form-control" value="{{postagem.descricao}}" required>
+    <label for="conteudo">Conteúdo</label>
+    <textarea name="conteudo" class="form-control" rows="8" required>{{postagem.conteudo}}</textarea>
+    <label for="categoria" class="mt-1">Categoria:</label>
+    <select name="categoria" class="form-control" value="">
+        {{#each categorias}}
+        <option value="{{_id}}">{{nome}}</option>
+        {{else}}
+        <option value="0">Nenhuma categoria encontrada</option>
+        {{/each}}
+    </select>
+    <button type="submit" class="btn btn-success d-block my-3">Editar Postagem</button>
+</form>
+
+
+{{!-- Para fazer com que a tag 'select' entre com a categoria selecionada de maneira correta --}}
+<script>
+    let select = document.querySelector('select')
+    let i;
+    let indice;
+    let categoria = `{{postagem.categoria}}`
+    for(i = 0; i < select.length ; i++ ){
+        if(select.options[i].value == categoria){
+            indice = i;
+        }
+    }
+    select.options.selectedIndex = indice;
+
+</script> 
